@@ -210,6 +210,90 @@ button{
 .shake{
     animation:shake .4s ease;
 }
+.success-page{
+    position:fixed;
+    inset:0;
+    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    z-index:99999;
+}
+
+.success-circle{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:#16a34a;
+    color:#fff;
+    font-size:75px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 0 20px rgba(22,163,74,.08),
+               0 0 0 40px rgba(22,163,74,.05);
+    animation:successPop .7s ease;
+}
+
+.success-page h1{
+    margin-top:30px;
+    font-size:32px;
+    color:#111;
+    font-weight:700;
+}
+
+.success-page p{
+    margin-top:10px;
+    color:#666;
+    font-size:16px;
+    text-align:center;
+    padding:0 25px;
+}
+
+/* Confetti */
+
+.confetti{
+    position:absolute;
+    width:12px;
+    height:12px;
+    border-radius:3px;
+    animation:fall 3s linear infinite;
+}
+
+.c1{background:#FFD700;left:15%;top:-20px;animation-delay:.1s;}
+.c2{background:#16a34a;left:25%;top:-20px;animation-delay:.5s;}
+.c3{background:#3b82f6;left:40%;top:-20px;animation-delay:.9s;}
+.c4{background:#FFD700;left:55%;top:-20px;animation-delay:.3s;}
+.c5{background:#ef4444;left:70%;top:-20px;animation-delay:1.2s;}
+.c6{background:#16a34a;left:80%;top:-20px;animation-delay:.7s;}
+.c7{background:#3b82f6;left:50%;top:-20px;animation-delay:1.5s;}
+.c8{background:#FFD700;left:35%;top:-20px;animation-delay:1.8s;}
+
+@keyframes fall{
+    0%{
+        transform:translateY(-50px) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@keyframes successPop{
+    0%{
+        transform:scale(0);
+    }
+    60%{
+        transform:scale(1.15);
+    }
+    100%{
+        transform:scale(1);
+    }
+}
 </style>
 </head>
 <body>
@@ -315,7 +399,6 @@ button{
     </div>
 
 </div>
-
 <script>
 
 const steps=document.querySelectorAll(".step");
@@ -438,12 +521,39 @@ function nextStep(){
     }
 
     /* SUBMIT */
-    if(current === steps.length - 1){
+if(current === steps.length - 1){
 
-        alert("Application Submitted Successfully!");
-        return;
-    }
+    document.body.innerHTML = `
 
+    <div class="success-page">
+
+        <div class="confetti c1"></div>
+        <div class="confetti c2"></div>
+        <div class="confetti c3"></div>
+        <div class="confetti c4"></div>
+        <div class="confetti c5"></div>
+        <div class="confetti c6"></div>
+        <div class="confetti c7"></div>
+        <div class="confetti c8"></div>
+
+        <div class="success-circle">
+            ✓
+        </div>
+
+        <h1>Application Submitted</h1>
+
+        <p>Your documents have been submitted successfully.</p>
+
+    </div>
+
+    `;
+
+    setTimeout(() => {
+        window.location.href = "order.html";
+    }, 4000);
+
+    return;
+}
     current++;
     showStep(current);
 }
