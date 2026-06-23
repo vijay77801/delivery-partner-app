@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get OTP</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow-x:hidden;
+    background:#fff;
+}
+
+.container{
+    width:100%;
+    min-height:100vh;
+}
+
+/* Image Section */
+.hero{
+    width:100%;
+    height:82vh;
+    overflow:hidden;
+    border-bottom-left-radius:40px;
+    border-bottom-right-radius:40px;
+}
+
+.hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* Bottom Section */
+.bottom-section{
+    width:100%;
+    background:#fff;
+    padding:15px 20px 20px;
+}
+
+/* Mobile Input */
+.mobile-box{
+    width:100%;
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    background:#fff;
+    margin-bottom:12px;
+}
+
+.country-code{
+    height:100%;
+    padding:0 15px;
+    display:flex;
+    align-items:center;
+    background:#f8f8f8;
+    border-right:1px solid #ddd;
+    font-size:16px;
+    font-weight:600;
+}
+
+.mobile-box input{
+    flex:1;
+    height:100%;
+    border:none;
+    outline:none;
+    padding:0 15px;
+    font-size:16px;
+}
+
+/* OTP Button */
+.otp-btn{
+    width:100%;
+    height:50px;
+    border:none;
+    border-radius:12px;
+    background:#0C831F;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.otp-btn:hover{
+    background:#096b18;
+}
+
+/* Desktop Preview */
+@media(min-width:768px){
+
+    body{
+        display:flex;
+        justify-content:center;
+        background:#f5f5f5;
+    }
+
+    .container{
+        width:430px;
+        background:#fff;
+        min-height:100vh;
+    }
+}
+.mobile-box.shake{
+    animation:shake 0.4s;
+    border-color:red;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0);}
+    20%{transform:translateX(-8px);}
+    40%{transform:translateX(8px);}
+    60%{transform:translateX(-8px);}
+    80%{transform:translateX(8px);}
+    100%{transform:translateX(0);}
+}
+.otp-input{
+    width:100%;
+    height:50px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:0 15px;
+    font-size:18px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.mobile-box.shake,
+.otp-input.shake{
+    animation:shake .4s;
+    border-color:red;
+}
+
+@keyframes shake{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    50%{transform:translateX(8px);}
+    75%{transform:translateX(-8px);}
+    100%{transform:translateX(0);}
+}
+.otp-container{
+    display:flex;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.otp-box{
+    width:50px;
+    height:55px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    text-align:center;
+    font-size:22px;
+    font-weight:600;
+    outline:none;
+}
+
+.otp-box:focus{
+    border-color:#0C831F;
+}
+
+.otp-container.shake{
+    animation:shake .4s;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Your Image -->
+    <div class="hero">
+        <img src="image1.jpeg" alt="Banner">
+    </div>
+
+    <!-- Mobile Number & OTP -->
+ <div class="bottom-section">
+
+    <!-- Mobile Number Screen -->
+    <div id="mobileScreen">
+
+        <div class="mobile-box">
+            <span class="country-code">+91</span>
+            <input
+                type="tel"
+                id="mobile"
+                maxlength="10"
+                placeholder="Enter mobile number">
+        </div>
+
+        <button class="otp-btn" onclick="sendOTP()">
+            Get OTP
+        </button>
+
+    </div>
+
+    <!-- OTP Screen -->
+<div id="otpScreen" style="display:none; width:100%;">
+
+    <div class="otp-container">
+        <input type="text" maxlength="1" class="otp-box" id="otp1">
+        <input type="text" maxlength="1" class="otp-box" id="otp2">
+        <input type="text" maxlength="1" class="otp-box" id="otp3">
+        <input type="text" maxlength="1" class="otp-box" id="otp4">
+        <input type="text" maxlength="1" class="otp-box" id="otp5">
+        <input type="text" maxlength="1" class="otp-box" id="otp6">
+    </div>
+
+    <button class="otp-btn" onclick="verifyOTP()">
+        Verify OTP
+    </button>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function sendOTP(){
+
+    let mobile = document.getElementById("mobile").value.trim();
+    let mobileBox = document.querySelector(".mobile-box");
+
+    mobileBox.classList.remove("shake");
+
+    if(!/^[0-9]{10}$/.test(mobile)){
+
+        void mobileBox.offsetWidth;
+        mobileBox.classList.add("shake");
+        return;
+    }
+
+    // Hide Mobile Screen
+    document.getElementById("mobileScreen").style.display = "none";
+
+    // Show OTP Screen
+    document.getElementById("otpScreen").style.display = "block";
+}
+
+function verifyOTP(){
+
+    let otp =
+        document.getElementById("otp1").value +
+        document.getElementById("otp2").value +
+        document.getElementById("otp3").value +
+        document.getElementById("otp4").value +
+        document.getElementById("otp5").value +
+        document.getElementById("otp6").value;
+
+    let otpContainer = document.querySelector(".otp-container");
+
+    otpContainer.classList.remove("shake");
+
+    if(otp !== "123456"){
+
+        void otpContainer.offsetWidth;
+        otpContainer.classList.add("shake");
+        return;
+    }
+
+    alert("OTP Verified Successfully");
+
+let mobile = document.getElementById("mobile").value;
+
+window.location.href = "document.html?mobile=" + mobile;
+}
+const otpInputs = document.querySelectorAll(".otp-box");
+
+otpInputs.forEach((input,index)=>{
+
+    input.addEventListener("input",()=>{
+
+        if(input.value.length === 1 && index < otpInputs.length-1){
+            otpInputs[index+1].focus();
+        }
+
+    });
+
+    input.addEventListener("keydown",(e)=>{
+
+        if(e.key==="Backspace" &&
+           input.value==="" &&
+           index>0){
+
+            otpInputs[index-1].focus();
+        }
+
+    });
+
+});
+</script>
+</body>
+</html>
