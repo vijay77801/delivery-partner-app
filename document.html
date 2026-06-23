@@ -1,1 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Partner Registration</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
+
+body{
+    background:#f4f6f8;
+    min-height:100vh;
+}
+
+/* TOP IMAGE TAKES 2/4 OF MOBILE SCREEN */
+.top-image{
+    width:100%;
+    height:45vh;
+    overflow:hidden;
+    border-bottom-left-radius:35px;
+    border-bottom-right-radius:35px;
+}
+
+.top-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* FORM SECTION */
+.form-wrapper{
+    background:#fff;
+    margin-top:-20px;
+    border-top-left-radius:30px;
+    border-top-right-radius:30px;
+    padding:25px;
+    min-height:55vh;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.heading h2{
+    color:#16a34a;
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.heading p{
+    color:#666;
+    font-size:14px;
+}
+
+.progress{
+    text-align:center;
+    color:#16a34a;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+/* STEP FORM */
+.step{
+    display:none;
+    animation:fade .3s ease;
+}
+
+.step.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateX(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    color:#333;
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    border:2px solid #e5e5e5;
+    border-radius:12px;
+    margin-bottom:18px;
+    font-size:15px;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:#16a34a;
+}
+
+.upload-card{
+    border:2px dashed #16a34a;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    background:#f0fff4;
+}
+
+.upload-card h3{
+    color:#16a34a;
+    margin-bottom:10px;
+}
+
+.upload-card p{
+    color:#666;
+    margin-bottom:15px;
+}
+
+.upload-card input{
+    border:none;
+    background:none;
+}
+
+/* BUTTONS */
+.buttons{
+    display:flex;
+    gap:10px;
+    margin-top:20px;
+}
+
+button{
+    flex:1;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+}
+
+.prev{
+    background:#e5e7eb;
+}
+
+.next{
+    background:#16a34a;
+    color:#fff;
+}
+
+.submit{
+    background:#15803d;
+    color:#fff;
+}
+
+.success{
+    text-align:center;
+    padding:20px;
+}
+
+.success h2{
+    color:#16a34a;
+    margin-bottom:10px;
+}
+
+.success p{
+    color:#666;
+}
+
+@media(min-width:768px){
+
+    body{
+        display:flex;
+        justify-content:center;
+        padding:20px;
+    }
+
+    .container{
+        width:450px;
+        background:#fff;
+        border-radius:30px;
+        overflow:hidden;
+        box-shadow:0 10px 30px rgba(0,0,0,.1);
+    }
+
+    .top-image{
+        height:350px;
+    }
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px); }
+    40% { transform: translateX(10px); }
+    60% { transform: translateX(-10px); }
+    80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake{
+    animation:shake .4s ease;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- REPLACE IMAGE -->
+    <div class="top-image">
+        <img src="image2.png" alt="Delivery Partner">
+    </div>
+
+    <div class="form-wrapper">
+
+        <div class="heading">
+            <h2></h2>
+            <p>Become a Delivery Partner</p>
+        </div>
+
+        <div class="progress">
+            Step <span id="stepNo">1</span> of 8
+        </div>
+
+        <!-- STEP 1 -->
+        <div class="step active">
+            <label>Full Name</label>
+           <input type="text" id="name" placeholder="Enter Full Name">
+            <label>Mobile Number</label>
+           <input type="tel" id="mobile" placeholder="Enter Mobile Number">
+
+            <label>Gender</label>
+           <select id="gender">
+                <option>Select Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step">
+            <label>Vehicle Number</label>
+            <input type="text" id="vehicle" placeholder="AP39AB1234">
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step">
+            <div class="upload-card">
+                <h3>RC Card Upload</h3>
+                <p>Upload Vehicle RC Card</p>
+                <input type="file" id="rcCard">
+            </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step">
+            <div class="upload-card">
+                <h3>Driving License Upload</h3>
+                <p>Upload License Image</p>
+         <input type="file" id="license">
+            </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step">
+            <div class="upload-card">
+                <h3>Bike Insurance Upload</h3>
+                <p>Upload Insurance Copy</p>
+                <input type="file" id="insurance">
+            </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div class="step">
+            <div class="upload-card">
+                <h3>Aadhaar Card Upload</h3>
+                <p>Upload Aadhaar Front/Back</p>
+                <input type="file" id="aadhaar">
+            </div>
+        </div>
+
+        <!-- STEP 7 -->
+        <div class="step">
+            <div class="upload-card">
+                <h3>PAN Card Upload</h3>
+                <p>Upload PAN Card</p>
+                <input type="file" id="pan">
+            </div>
+        </div>
+
+        <!-- STEP 8 -->
+        <div class="step">
+            <div class="success">
+                <h2>Ready to Submit</h2>
+                <p>Please verify all details and submit your application.</p>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="prev" onclick="prevStep()">Previous</button>
+            <button class="next" id="nextBtn" onclick="nextStep()">Next</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const steps=document.querySelectorAll(".step");
+const stepNo=document.getElementById("stepNo");
+const nextBtn=document.getElementById("nextBtn");
+
+let current=0;
+
+function showStep(index){
+
+    steps.forEach(step=>{
+        step.classList.remove("active");
+    });
+
+    steps[index].classList.add("active");
+
+    stepNo.innerText=index+1;
+
+    document.querySelector(".prev").style.visibility=
+    index===0?"hidden":"visible";
+
+    if(index===steps.length-1){
+        nextBtn.innerText="Submit";
+        nextBtn.classList.add("submit");
+    }else{
+        nextBtn.innerText="Next";
+        nextBtn.classList.remove("submit");
+    }
+}
+
+
+function shakeScreen(){
+
+    document.querySelector(".container").classList.add("shake");
+
+    if(navigator.vibrate){
+        navigator.vibrate(200);
+    }
+
+    setTimeout(()=>{
+        document.querySelector(".container").classList.remove("shake");
+    },400);
+}
+function nextStep(){
+
+    /* STEP 1 */
+    if(current === 0){
+
+        let name = document.getElementById("name").value.trim();
+        let mobile = document.getElementById("mobile").value.trim();
+        let gender = document.getElementById("gender").value;
+
+        if(name === "" || mobile === "" || gender === "Select Gender"){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 2 */
+    if(current === 1){
+
+        let vehicle = document.getElementById("vehicle").value.trim();
+
+        if(vehicle === ""){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 3 */
+    if(current === 2){
+
+        if(document.getElementById("rcCard").files.length === 0){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 4 */
+    if(current === 3){
+
+        if(document.getElementById("license").files.length === 0){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 5 */
+    if(current === 4){
+
+        if(document.getElementById("insurance").files.length === 0){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 6 */
+    if(current === 5){
+
+        if(document.getElementById("aadhaar").files.length === 0){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* STEP 7 */
+    if(current === 6){
+
+        if(document.getElementById("pan").files.length === 0){
+
+            shakeScreen();
+            return;
+        }
+    }
+
+    /* SUBMIT */
+    if(current === steps.length - 1){
+
+        alert("Application Submitted Successfully!");
+        return;
+    }
+
+    current++;
+    showStep(current);
+}
+function prevStep(){
+
+    if(current > 0){
+
+        current--;
+
+        showStep(current);
+    }
+}
+
+showStep(0);
+const params = new URLSearchParams(window.location.search);
+
+const mobile = params.get("mobile");
+
+if(mobile){
+    document.getElementById("mobile").value = mobile;
+}
+</script>
+
+</body>
+</html>
